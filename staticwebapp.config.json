@@ -1,16 +1,53 @@
 {
   "navigationFallback": {
-    "rewrite": "/views/01-welcome.html"
+    "rewrite": "/views/01-welcome.html",
+    "exclude": ["/assets/*", "/scripts/*", "/public/*"]
   },
   "routes": [
     {
       "route": "/",
       "rewrite": "/views/01-welcome.html"
+    },
+    {
+      "route": "/views/*",
+      "headers": {
+        "Cache-Control": "public, max-age=3600"
+      }
+    },
+    {
+      "route": "/assets/*",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000"
+      }
+    },
+    {
+      "route": "/scripts/*",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000"
+      }
     }
   ],
   "mimeTypes": {
     ".json": "application/json",
     ".css": "text/css",
-    ".js": "text/javascript"
+    ".js": "text/javascript",
+    ".html": "text/html",
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".svg": "image/svg+xml",
+    ".gif": "image/gif",
+    ".webp": "image/webp"
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Content-Security-Policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; img-src 'self' data: https:;"
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/views/01-welcome.html",
+      "statusCode": 200
+    }
   }
 }
