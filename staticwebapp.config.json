@@ -1,0 +1,16 @@
+{
+  "navigationFallback": {
+    "rewrite": "/views/01-welcome.html"
+  },
+  "routes": [
+    {
+      "route": "/",
+      "rewrite": "/views/01-welcome.html"
+    }
+  ],
+  "mimeTypes": {
+    ".json": "application/json",
+    ".css": "text/css",
+    ".js": "text/javascript"
+  }
+}
